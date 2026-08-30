@@ -17,7 +17,7 @@ interface Props {
 export function Panel({ title, onClose, children }: Props) {
   const start = useRef<{ x: number; y: number; time: number } | null>(null);
   const axis = useRef<"none" | "x" | "y">("none");
-  const closeTimer = useRef<number>();
+  const closeTimer = useRef<number | undefined>(undefined);
   const [phase, setPhase] = useState<Phase>("enter");
   const [offset, setOffset] = useState(0);
   const [dragging, setDragging] = useState(false);

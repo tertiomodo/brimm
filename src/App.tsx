@@ -25,7 +25,7 @@ export function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [delta, setDelta] = useState<number | null>(null);
-  const deltaTimer = useRef<number>();
+  const deltaTimer = useRef<number | undefined>(undefined);
 
   const percent = Math.round((todayRecord.total / data.goal) * 100);
   const level = Math.min(1, todayRecord.total / data.goal);
