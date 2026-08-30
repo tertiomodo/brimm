@@ -3,19 +3,14 @@ import styles from "./PercentBadge.module.css";
 interface Props {
   percent: number;
   delta: number | null;
-  onOpenHistory: () => void;
 }
 
-export function PercentBadge({ percent, delta, onOpenHistory }: Props) {
+export function PercentBadge({ percent, delta }: Props) {
   return (
     <div className={styles.wrap}>
-      <button
-        className={styles.badge}
-        onClick={onOpenHistory}
-        aria-label="Open today's log"
-      >
+      <div className={styles.badge}>
         <span className={styles.value}>{percent}%</span>
-      </button>
+      </div>
       <span
         className={styles.delta}
         key={delta ?? "idle"}

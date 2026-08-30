@@ -16,11 +16,6 @@
   backdrop-filter: blur(10px) saturate(160%);
   -webkit-backdrop-filter: blur(10px) saturate(160%);
   box-shadow: 0 8px 28px rgba(27, 77, 69, 0.08);
-  transition: transform 0.18s var(--ease);
-}
-
-.badge:active {
-  transform: scale(0.97);
 }
 
 .value {

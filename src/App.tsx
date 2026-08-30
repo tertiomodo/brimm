@@ -6,10 +6,7 @@ import { PercentBadge } from "./components/PercentBadge/PercentBadge";
 import { AddButton } from "./components/AddButton/AddButton";
 import { AmountSheet } from "./components/AmountSheet/AmountSheet";
 import { SettingsPanel } from "./components/SettingsPanel/SettingsPanel";
-import { HistoryPanel } from "./components/HistoryPanel/HistoryPanel";
 import styles from "./App.module.css";
-
-type Screen = "glass" | "settings" | "history";
 
 export function App() {
   const {
@@ -25,7 +22,7 @@ export function App() {
     // setAlertsOn,
   } = useWaterTracker();
 
-  const [screen, setScreen] = useState<Screen>("glass");
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [delta, setDelta] = useState<number | null>(null);
   const deltaTimer = useRef<number>();
@@ -54,18 +51,14 @@ export function App() {
 
         <button
           className={styles.settingsBtn}
-          onClick={() => setScreen("settings")}
+          onClick={() => setSettingsOpen(true)}
           aria-label="Settings"
         >
           <span className={styles.settingsIcon} aria-hidden />
         </button>
 
         <div className={styles.badgeSlot}>
-          <PercentBadge
-            percent={percent}
-            delta={delta}
-            onOpenHistory={() => setScreen("history")}
-          />
+          <PercentBadge percent={percent} delta={delta} />
         </div>
 
         <div className={styles.actions}>
@@ -87,24 +80,15 @@ export function App() {
           />
         )}
 
-        {screen === "settings" && (
+        {settingsOpen && (
           <SettingsPanel
             goal={data.goal}
-            // alertsOn={data.alertsOn}
-            onGoalChange={setGoal}
-            // onAlertsChange={setAlertsOn}
-            onClose={() => setScreen("glass")}
-          />
-        )}
-
-        {screen === "history" && (
-          <HistoryPanel
-            servings={todayRecord.servings}
             total={todayRecord.total}
-            goal={data.goal}
+            servings={todayRecord.servings}
             yesterdayTotal={yesterdayTotal}
+            onGoalChange={setGoal}
             onRemove={removeServing}
-            onClose={() => setScreen("glass")}
+            onClose={() => setSettingsOpen(false)}
           />
         )}
       </div>
