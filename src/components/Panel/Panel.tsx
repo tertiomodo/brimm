@@ -4,7 +4,9 @@ import styles from "./Panel.module.css";
 const AXIS_LOCK = 10;
 const CLOSE_DISTANCE = 80;
 const CLOSE_VELOCITY = 0.5;
-const CLOSE_DURATION = 220;
+const CLOSE_DURATION = 260;
+
+type Phase = "enter" | "open" | "closing";
 
 interface Props {
   title: string;
@@ -15,15 +17,33 @@ interface Props {
 export function Panel({ title, onClose, children }: Props) {
   const start = useRef<{ x: number; y: number; time: number } | null>(null);
   const axis = useRef<"none" | "x" | "y">("none");
-  const closing = useRef(false);
   const closeTimer = useRef<number>();
+  const [phase, setPhase] = useState<Phase>("enter");
   const [offset, setOffset] = useState(0);
   const [dragging, setDragging] = useState(false);
 
-  useEffect(() => () => clearTimeout(closeTimer.current), []);
+  useEffect(() => {
+    let inner = 0;
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => setPhase("open"));
+    });
+    return () => {
+      cancelAnimationFrame(outer);
+      cancelAnimationFrame(inner);
+      clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  function close() {
+    if (phase === "closing") return;
+    setDragging(false);
+    setPhase("closing");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    closeTimer.current = window.setTimeout(onClose, reduced ? 0 : CLOSE_DURATION);
+  }
 
   function handleTouchStart(e: TouchEvent) {
-    if (closing.current || e.touches.length !== 1) return;
+    if (phase !== "open" || e.touches.length !== 1) return;
     const touch = e.touches[0];
     start.current = { x: touch.clientX, y: touch.clientY, time: Date.now() };
     axis.current = "none";
@@ -52,17 +72,13 @@ export function Panel({ title, onClose, children }: Props) {
     const from = start.current;
     start.current = null;
     if (axis.current !== "x" || !from) return;
+    axis.current = "none";
 
     const velocity = offset / Math.max(1, Date.now() - from.time);
     setDragging(false);
 
-    if (offset > CLOSE_DISTANCE || velocity > CLOSE_VELOCITY) {
-      closing.current = true;
-      setOffset(window.innerWidth);
-      closeTimer.current = window.setTimeout(onClose, CLOSE_DURATION);
-    } else {
-      setOffset(0);
-    }
+    if (offset > CLOSE_DISTANCE || velocity > CLOSE_VELOCITY) close();
+    else setOffset(0);
   }
 
   return (
@@ -70,15 +86,18 @@ export function Panel({ title, onClose, children }: Props) {
       className={styles.panel}
       role="dialog"
       aria-label={title}
+      data-phase={phase}
       data-dragging={dragging || undefined}
-      style={offset ? { transform: `translateX(${offset}px)` } : undefined}
+      style={{
+        transform: phase === "open" ? `translateX(${offset}px)` : "translateX(100%)",
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
     >
       <header className={styles.header}>
-        <button className={styles.back} onClick={onClose} aria-label="Back">
+        <button className={styles.back} onClick={close} aria-label="Back">
           <span className={styles.backIcon} aria-hidden />
         </button>
         <h2 className={styles.title}>{title}</h2>

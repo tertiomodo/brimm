@@ -6,13 +6,13 @@
   flex-direction: column;
   background: var(--empty);
   touch-action: pan-y;
-  transition: transform 0.22s var(--ease);
-  animation: slideIn 0.3s var(--ease);
+  will-change: transform;
+  transition: transform 0.26s var(--ease);
 }
 
+.panel[data-phase="enter"],
 .panel[data-dragging] {
   transition: none;
-  animation: none;
 }
 
 .header {
@@ -67,30 +67,8 @@
   padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .panel {
-    animation: fadeIn 0.2s var(--ease);
-  }
-
-  .panel:not([data-dragging]) {
     transition: none;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 }
