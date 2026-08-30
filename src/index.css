@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --water: #4bb6a7;
+  --water-deep: #3ea697;
+  --water-ink: #2e8c7e;
+  --empty: #ffffff;
+  --accent: #c79be3;
+  --ink: #1b4d45;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --hairline: rgba(27, 77, 69, 0.1);
+
+  --radius-pill: 9999px;
+  --radius-badge: 26px;
+  --radius-card: 34px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Noto-Sans", sans-serif;
+  color: var(--ink);
+  background: var(--empty);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+#root {
+  height: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}

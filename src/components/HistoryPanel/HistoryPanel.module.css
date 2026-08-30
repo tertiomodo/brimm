@@ -1,0 +1,63 @@
+.summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  padding: 26px 20px 22px;
+}
+
+.total {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--water-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.of {
+  font-size: 15px;
+  color: rgba(27, 77, 69, 0.5);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amount {
+  margin-left: auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.remove {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  color: rgba(27, 77, 69, 0.35);
+}
+
+.remove svg {
+  width: 18px;
+  height: 18px;
+}
+
+.remove:active {
+  background: rgba(27, 77, 69, 0.08);
+  color: var(--ink);
+}
+
+.yesterday {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 20px 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+  font-size: 16px;
+}

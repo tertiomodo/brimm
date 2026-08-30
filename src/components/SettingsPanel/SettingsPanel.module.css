@@ -1,0 +1,66 @@
+/* Инлайн pill-инпут цели, как на референсе */
+.goalField {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 7px 14px;
+  border: 1.5px solid var(--water);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--water-ink);
+}
+
+.goalInput {
+  width: 56px;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  color: var(--water-ink);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.goalInput::-webkit-outer-spin-button,
+.goalInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.toggle {
+  flex: none;
+  width: 50px;
+  height: 30px;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  background: rgba(27, 77, 69, 0.14);
+  transition: background-color 0.22s var(--ease);
+}
+
+.toggle[aria-checked='true'] {
+  background: var(--water);
+}
+
+.knob {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--empty);
+  box-shadow: 0 2px 5px rgba(27, 77, 69, 0.2);
+  transition: transform 0.22s var(--ease);
+}
+
+.toggle[aria-checked='true'] .knob {
+  transform: translateX(20px);
+}
+
+.note {
+  margin: 14px 20px 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(27, 77, 69, 0.5);
+}

@@ -1,0 +1,108 @@
+.page {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+/* Сам «стакан»: на мобильном — весь экран, на десктопе — карточка по центру. */
+.glass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--empty);
+  isolation: isolate;
+}
+
+.settingsBtn {
+  position: absolute;
+  top: calc(14px + env(safe-area-inset-top));
+  right: 14px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  color: var(--water-ink);
+}
+
+.settingsBtn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.settingsBtn:active {
+  background: var(--glass);
+}
+
+.badgeSlot {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.actions {
+  position: absolute;
+  bottom: calc(34px + env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(27, 77, 69, 0.62);
+}
+
+.hint:active {
+  background: var(--glass);
+}
+
+.chevron {
+  width: 12px;
+  height: 12px;
+}
+
+/* На широком экране интерфейс не превращается в карточку, а дышит: те же
+   элементы, только крупнее и с бОльшими отступами. */
+@media (min-width: 700px) {
+  .settingsBtn {
+    top: calc(22px + env(safe-area-inset-top));
+    right: 22px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .settingsBtn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .badgeSlot {
+    top: 28%;
+  }
+
+  .actions {
+    bottom: calc(54px + env(safe-area-inset-bottom));
+    gap: 16px;
+  }
+
+  .hint {
+    font-size: 14px;
+  }
+}

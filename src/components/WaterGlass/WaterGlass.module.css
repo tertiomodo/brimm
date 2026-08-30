@@ -1,0 +1,55 @@
+.water {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: linear-gradient(180deg, var(--water) 0%, var(--water-deep) 100%);
+  transition: height 1s var(--ease);
+}
+
+/* Волны живут над кромкой воды и торчат наружу вверх на свою высоту.
+   Высота пропорциональна ширине экрана: один период волны равен ширине окна,
+   поэтому на мониторе фиксированные 46px давали почти плоский изгиб. */
+.waves {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: clamp(46px, 5.5vw, 110px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 200%;
+  height: 100%;
+}
+
+.wave path {
+  fill: var(--water);
+}
+
+.waveBack {
+  opacity: 0.45;
+  animation: drift 7s linear infinite;
+}
+
+.waveFront {
+  animation: drift 4.5s linear infinite reverse;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/*
+ * При «уменьшении движения» волна не выключается — она несущий элемент интерфейса,
+ * а не декоративный транзит. Вместо этого замедляется до едва заметного дрейфа.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .waveBack { animation-duration: 12s; }
+  .waveFront { animation-duration: 8s; }
+  .water { transition-duration: 0.4s; }
+}

@@ -1,0 +1,30 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 60px;
+  margin: 0 20px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 16px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.muted {
+  color: rgba(27, 77, 69, 0.5);
+}
+
+.empty {
+  margin: 40px 20px;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(27, 77, 69, 0.45);
+}

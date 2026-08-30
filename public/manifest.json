@@ -1,0 +1,18 @@
+{
+  "name": "Brimm",
+  "short_name": "Brimm",
+  "description": "Daily water intake tracker",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#4BB6A7",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
