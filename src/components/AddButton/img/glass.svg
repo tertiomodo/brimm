@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <clipPath id="glass">
+    <path d="M5.15 2H18.85L17.02 20.9Q16.92 22 15.85 22H8.15Q7.08 22 6.98 20.9Z"/>
+  </clipPath>
+  <g clip-path="url(#glass)">
+    <rect width="24" height="24" fill="#4BB6A7" opacity="0.2"/>
+    <path
+      d="M4.4 9.05C5.6 7.9 7.6 6.61 9.31 6.61C10.7 6.61 11.5 7.35 12.3 8.15L12.3 23L4.4 23Z"
+      fill="#2E8C7E"
+    />
+    <path
+      d="M4.4 8.09C5.9 8.55 7.6 9.39 9.31 9.39C11.3 9.39 12.9 7.13 14.86 7.13C16.5 7.13 17.6 8.2 19.4 9.3L19.4 23L4.4 23Z"
+      fill="#4BB6A7"
+    />
+    <path
+      d="M4.4 8.09C5.9 8.55 7.6 9.39 9.31 9.39C11.3 9.39 12.9 7.13 14.86 7.13C16.5 7.13 17.6 8.2 19.4 9.3"
+      fill="none"
+      stroke="#000"
+      stroke-width="0.85"
+    />
+    <path
+      d="M4.4 9.05C5.6 7.9 7.6 6.61 9.31 6.61C10.7 6.61 11.5 7.35 12.3 8.15"
+      fill="none"
+      stroke="#000"
+      stroke-width="0.85"
+      stroke-linecap="round"
+    />
+  </g>
+  <path
+    d="M5.15 2H18.85L17.02 20.9Q16.92 22 15.85 22H8.15Q7.08 22 6.98 20.9Z"
+    fill="none"
+    stroke="#000"
+    stroke-width="1"
+    stroke-linejoin="round"
+  />
+</svg>

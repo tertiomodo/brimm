@@ -9,8 +9,6 @@
 }
 
 .header {
-  /* Колонка контента ограничена и центрирована — на мониторе строки настроек
-     не должны растягиваться от края до края. */
   padding-inline: max(12px, calc((100% - 640px) / 2));
 
   position: relative;
@@ -31,9 +29,12 @@
   color: var(--water);
 }
 
-.back svg {
+.backIcon {
   width: 22px;
   height: 22px;
+  background: currentColor;
+  -webkit-mask: url(./img/back.svg) center / contain no-repeat;
+  mask: url(./img/back.svg) center / contain no-repeat;
 }
 
 .back:active {
@@ -60,15 +61,25 @@
 }
 
 @keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .panel { animation: fadeIn 0.2s var(--ease); }
+  .panel {
+    animation: fadeIn 0.2s var(--ease);
+  }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }

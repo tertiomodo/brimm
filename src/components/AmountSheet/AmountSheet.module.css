@@ -29,6 +29,16 @@
   color: rgba(27, 77, 69, 0.45);
 }
 
+.rowGroup {
+  display: flex;
+  align-items: center;
+}
+
+.rowGroup .row {
+  flex: 1;
+  min-width: 0;
+}
+
 .row {
   display: flex;
   align-items: center;
@@ -54,7 +64,33 @@
 .check {
   width: 20px;
   height: 20px;
-  color: var(--water);
+  background: var(--water);
+  -webkit-mask: url(./img/check.svg) center / contain no-repeat;
+  mask: url(./img/check.svg) center / contain no-repeat;
+}
+
+.remove {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: rgba(27, 77, 69, 0.4);
+  cursor: pointer;
+}
+
+.remove:active {
+  background: rgba(27, 77, 69, 0.08);
+}
+
+.removeIcon {
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: url(./img/close.svg) center / contain no-repeat;
+  mask: url(./img/close.svg) center / contain no-repeat;
 }
 
 .customLabel {
@@ -92,15 +128,25 @@
 }
 
 @keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes rise {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sheet { animation: fade 0.2s var(--ease); }
+  .sheet {
+    animation: fade 0.2s var(--ease);
+  }
 }

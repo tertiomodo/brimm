@@ -1,4 +1,3 @@
-/* Инлайн pill-инпут цели, как на референсе */
 .goalField {
   display: inline-flex;
   align-items: baseline;
@@ -40,7 +39,7 @@
   transition: background-color 0.22s var(--ease);
 }
 
-.toggle[aria-checked='true'] {
+.toggle[aria-checked="true"] {
   background: var(--water);
 }
 
@@ -54,7 +53,7 @@
   transition: transform 0.22s var(--ease);
 }
 
-.toggle[aria-checked='true'] .knob {
+.toggle[aria-checked="true"] .knob {
   transform: translateX(20px);
 }
 

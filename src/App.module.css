@@ -4,7 +4,6 @@
   place-items: center;
 }
 
-/* Сам «стакан»: на мобильном — весь экран, на десктопе — карточка по центру. */
 .glass {
   position: relative;
   width: 100%;
@@ -27,9 +26,12 @@
   color: var(--water-ink);
 }
 
-.settingsBtn svg {
+.settingsIcon {
   width: 22px;
   height: 22px;
+  background: currentColor;
+  -webkit-mask: url(./img/settings.svg) center / contain no-repeat;
+  mask: url(./img/settings.svg) center / contain no-repeat;
 }
 
 .settingsBtn:active {
@@ -76,10 +78,11 @@
 .chevron {
   width: 12px;
   height: 12px;
+  background: currentColor;
+  -webkit-mask: url(./img/chevron.svg) center / contain no-repeat;
+  mask: url(./img/chevron.svg) center / contain no-repeat;
 }
 
-/* На широком экране интерфейс не превращается в карточку, а дышит: те же
-   элементы, только крупнее и с бОльшими отступами. */
 @media (min-width: 700px) {
   .settingsBtn {
     top: calc(22px + env(safe-area-inset-top));
@@ -88,7 +91,7 @@
     height: 44px;
   }
 
-  .settingsBtn svg {
+  .settingsIcon {
     width: 24px;
     height: 24px;
   }

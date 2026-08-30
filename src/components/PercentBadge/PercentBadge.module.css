@@ -32,7 +32,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Всплывающая подпись прибавки: смонтирована всегда, чтобы не дёргать раскладку. */
 .delta {
   position: absolute;
   top: calc(100% + 14px);
@@ -49,17 +48,37 @@
 }
 
 @keyframes floatUp {
-  0%   { opacity: 0; transform: translateY(10px); }
-  18%  { opacity: 1; transform: translateY(0); }
-  70%  { opacity: 1; transform: translateY(-4px); }
-  100% { opacity: 0; transform: translateY(-14px); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .delta[data-visible] { animation: fadeInOut 1.6s var(--ease) forwards; }
+  .delta[data-visible] {
+    animation: fadeInOut 1.6s var(--ease) forwards;
+  }
 
   @keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    18%, 70% { opacity: 1; }
+    0%,
+    100% {
+      opacity: 0;
+    }
+    18%,
+    70% {
+      opacity: 1;
+    }
   }
 }

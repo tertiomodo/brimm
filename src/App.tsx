@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useWaterTracker } from "./hooks/useWaterTracker";
-import { useReminders } from "./hooks/useReminders";
+// import { useReminders } from "./hooks/useReminders";
 import { WaterGlass } from "./components/WaterGlass/WaterGlass";
 import { PercentBadge } from "./components/PercentBadge/PercentBadge";
 import { AddButton } from "./components/AddButton/AddButton";
@@ -20,7 +20,9 @@ export function App() {
     removeServing,
     setGoal,
     setServingSize,
-    setAlertsOn,
+    addSize,
+    removeSize,
+    // setAlertsOn,
   } = useWaterTracker();
 
   const [screen, setScreen] = useState<Screen>("glass");
@@ -31,7 +33,7 @@ export function App() {
   const percent = Math.round((todayRecord.total / data.goal) * 100);
   const level = Math.min(1, todayRecord.total / data.goal);
 
-  useReminders(data.alertsOn, level >= 1);
+  // useReminders(data.alertsOn, level >= 1);
 
   function handleAdd() {
     addServing(data.servingSize);
@@ -55,18 +57,7 @@ export function App() {
           onClick={() => setScreen("settings")}
           aria-label="Settings"
         >
-          <svg viewBox="0 0 24 24" aria-hidden>
-            <g
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.9"
-              strokeLinecap="round"
-            >
-              <path d="M3 8.5h11M18.5 8.5H21M3 15.5h4.5M12 15.5h9" />
-              <circle cx="16.2" cy="8.5" r="2.3" />
-              <circle cx="9.7" cy="15.5" r="2.3" />
-            </g>
-          </svg>
+          <span className={styles.settingsIcon} aria-hidden />
         </button>
 
         <div className={styles.badgeSlot}>
@@ -81,23 +72,17 @@ export function App() {
           <AddButton onClick={handleAdd} />
           <button className={styles.hint} onClick={() => setSheetOpen(true)}>
             Tap to add {data.servingSize} ml
-            <svg className={styles.chevron} viewBox="0 0 12 12" aria-hidden>
-              <path
-                d="M2.5 4.5L6 8l3.5-3.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <span className={styles.chevron} aria-hidden />
           </button>
         </div>
 
         {sheetOpen && (
           <AmountSheet
             value={data.servingSize}
+            sizes={data.sizes}
             onSelect={handleSelectAmount}
+            onAddSize={addSize}
+            onRemoveSize={removeSize}
             onClose={() => setSheetOpen(false)}
           />
         )}
@@ -105,9 +90,9 @@ export function App() {
         {screen === "settings" && (
           <SettingsPanel
             goal={data.goal}
-            alertsOn={data.alertsOn}
+            // alertsOn={data.alertsOn}
             onGoalChange={setGoal}
-            onAlertsChange={setAlertsOn}
+            // onAlertsChange={setAlertsOn}
             onClose={() => setScreen("glass")}
           />
         )}

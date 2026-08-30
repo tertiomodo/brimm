@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { Panel } from '../Panel/Panel';
-import rows from '../Panel/rows.module.css';
-import styles from './SettingsPanel.module.css';
+import { useState } from "react";
+import { Panel } from "../Panel/Panel";
+import rows from "../Panel/rows.module.css";
+import styles from "./SettingsPanel.module.css";
 
 interface Props {
   goal: number;
-  alertsOn: boolean;
+  // alertsOn: boolean;
   onGoalChange: (goal: number) => void;
-  onAlertsChange: (on: boolean) => void;
+  // onAlertsChange: (on: boolean) => void;
   onClose: () => void;
 }
 
-export function SettingsPanel({ goal, alertsOn, onGoalChange, onAlertsChange, onClose }: Props) {
+export function SettingsPanel({ goal, onGoalChange, onClose }: Props) {
   const [draft, setDraft] = useState(String(goal));
 
   function commitGoal() {
@@ -33,8 +33,10 @@ export function SettingsPanel({ goal, alertsOn, onGoalChange, onAlertsChange, on
             max={10000}
             step={50}
             value={draft}
-            onChange={e => setDraft(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && (e.target as HTMLInputElement).blur()}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) =>
+              e.key === "Enter" && (e.target as HTMLInputElement).blur()
+            }
             onBlur={commitGoal}
             aria-label="Goal of the day, ml"
           />
@@ -42,6 +44,7 @@ export function SettingsPanel({ goal, alertsOn, onGoalChange, onAlertsChange, on
         </span>
       </div>
 
+      {/*
       <div className={rows.row}>
         <span className={rows.label}>Alert on</span>
         <button
@@ -60,6 +63,7 @@ export function SettingsPanel({ goal, alertsOn, onGoalChange, onAlertsChange, on
           A reminder every hour while the app stays open, until the goal is reached.
         </p>
       )}
+      */}
     </Panel>
   );
 }

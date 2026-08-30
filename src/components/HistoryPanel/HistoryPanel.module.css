@@ -42,9 +42,12 @@
   color: rgba(27, 77, 69, 0.35);
 }
 
-.remove svg {
+.removeIcon {
   width: 18px;
   height: 18px;
+  background: currentColor;
+  -webkit-mask: url(./img/close.svg) center / contain no-repeat;
+  mask: url(./img/close.svg) center / contain no-repeat;
 }
 
 .remove:active {

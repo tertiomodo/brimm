@@ -5,9 +5,6 @@
   transition: height 1s var(--ease);
 }
 
-/* Волны живут над кромкой воды и торчат наружу вверх на свою высоту.
-   Высота пропорциональна ширине экрана: один период волны равен ширине окна,
-   поэтому на мониторе фиксированные 46px давали почти плоский изгиб. */
 .waves {
   position: absolute;
   left: 0;
@@ -40,16 +37,22 @@
 }
 
 @keyframes drift {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-/*
- * При «уменьшении движения» волна не выключается — она несущий элемент интерфейса,
- * а не декоративный транзит. Вместо этого замедляется до едва заметного дрейфа.
- */
 @media (prefers-reduced-motion: reduce) {
-  .waveBack { animation-duration: 12s; }
-  .waveFront { animation-duration: 8s; }
-  .water { transition-duration: 0.4s; }
+  .waveBack {
+    animation-duration: 12s;
+  }
+  .waveFront {
+    animation-duration: 8s;
+  }
+  .water {
+    transition-duration: 0.4s;
+  }
 }

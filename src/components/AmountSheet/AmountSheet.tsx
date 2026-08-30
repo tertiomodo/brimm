@@ -1,17 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./AmountSheet.module.css";
 
-const PRESETS = [200, 250, 330, 500];
-
 interface Props {
   value: number;
+  sizes: number[];
   onSelect: (amount: number) => void;
+  onAddSize: (amount: number) => void;
+  onRemoveSize: (amount: number) => void;
   onClose: () => void;
 }
 
-export function AmountSheet({ value, onSelect, onClose }: Props) {
+export function AmountSheet({
+  value,
+  sizes,
+  onSelect,
+  onAddSize,
+  onRemoveSize,
+  onClose,
+}: Props) {
+  const sorted = [...sizes].sort((a, b) => a - b);
   const [custom, setCustom] = useState(
-    PRESETS.includes(value) ? "" : String(value),
+    sizes.includes(value) ? "" : String(value),
   );
   const customRef = useRef<HTMLInputElement>(null);
 
@@ -25,8 +34,12 @@ export function AmountSheet({ value, onSelect, onClose }: Props) {
 
   function commitCustom() {
     const amount = Math.round(Number(custom));
-    if (amount >= 10 && amount <= 3000) onSelect(amount);
-    else onClose();
+    if (amount < 10 || amount > 3000) {
+      onClose();
+      return;
+    }
+    onAddSize(amount);
+    onSelect(amount);
   }
 
   return (
@@ -38,16 +51,24 @@ export function AmountSheet({ value, onSelect, onClose }: Props) {
         aria-label="Glass size"
       >
         <p className={styles.title}>Glass size</p>
-        {PRESETS.map((amount) => (
-          <button
-            key={amount}
-            className={styles.row}
-            data-active={amount === value || undefined}
-            onClick={() => onSelect(amount)}
-          >
-            <span>{amount} ml</span>
-            {amount === value && <Check />}
-          </button>
+        {sorted.map((amount) => (
+          <div key={amount} className={styles.rowGroup}>
+            <button
+              className={styles.row}
+              data-active={amount === value || undefined}
+              onClick={() => onSelect(amount)}
+            >
+              <span>{amount} ml</span>
+              {amount === value && <Check />}
+            </button>
+            <button
+              className={styles.remove}
+              onClick={() => onRemoveSize(amount)}
+              aria-label={`Remove ${amount} ml`}
+            >
+              <span className={styles.removeIcon} aria-hidden />
+            </button>
+          </div>
         ))}
         <div className={styles.row} onClick={() => customRef.current?.focus()}>
           <label className={styles.customLabel} htmlFor="custom-amount">
@@ -78,15 +99,6 @@ export function AmountSheet({ value, onSelect, onClose }: Props) {
 
 function Check() {
   return (
-    <svg className={styles.check} viewBox="0 0 20 20" aria-hidden>
-      <path
-        d="M4 10.5l4 4 8-9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <span className={styles.check} aria-hidden />
   );
 }

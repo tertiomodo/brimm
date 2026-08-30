@@ -13,6 +13,7 @@ export interface DayRecord {
 export interface AppData {
   goal: number;
   servingSize: number;
+  sizes: number[];
   alertsOn: boolean;
   records: Record<string, DayRecord>;
 }
