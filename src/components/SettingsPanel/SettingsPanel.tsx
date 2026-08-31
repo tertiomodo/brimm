@@ -101,7 +101,7 @@ export function SettingsPanel({
             <div className={styles.row}>
               <span className={styles.label}>Yesterday</span>
               <span className={styles.value}>
-                {yesterdayTotal !== null ? `${yesterdayTotal} ml` : "No data"}
+                {yesterdayTotal ?? 0} ml
               </span>
             </div>
           </div>

@@ -3,7 +3,7 @@ import type { AppData } from "../types";
 const KEY = "brimm_data";
 
 const DEFAULTS: AppData = {
-  goal: 2500,
+  goal: 2000,
   servingSize: 250,
   sizes: [200, 250, 330, 500],
   alertsOn: false,

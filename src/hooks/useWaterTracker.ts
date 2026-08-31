@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 import type { AppData, DayRecord } from "../types";
 import { loadData, saveData } from "../utils/storage";
-import { todayKey, yesterdayKey } from "../utils/date";
+import { previousDayKey, todayKey } from "../utils/date";
+import { useTodayKey } from "./useTodayKey";
 
 function emptyRecord(date: string): DayRecord {
   return { date, total: 0, servings: [] };
@@ -9,6 +10,7 @@ function emptyRecord(date: string): DayRecord {
 
 export function useWaterTracker() {
   const [data, setData] = useState<AppData>(loadData);
+  const today = useTodayKey();
 
   const update = useCallback((fn: (prev: AppData) => AppData) => {
     setData((prev) => {
@@ -18,19 +20,19 @@ export function useWaterTracker() {
     });
   }, []);
 
-  const today = todayKey();
   const todayRecord = data.records[today] ?? emptyRecord(today);
-  const yesterdayTotal = data.records[yesterdayKey()]?.total ?? null;
+  const yesterdayTotal = data.records[previousDayKey(today)]?.total ?? null;
 
   const addServing = useCallback(
     (amount: number) => {
       update((prev) => {
-        const rec = prev.records[today] ?? emptyRecord(today);
+        const currentDay = todayKey();
+        const rec = prev.records[currentDay] ?? emptyRecord(currentDay);
         return {
           ...prev,
           records: {
             ...prev.records,
-            [today]: {
+            [currentDay]: {
               ...rec,
               total: rec.total + amount,
               servings: [
@@ -46,7 +48,7 @@ export function useWaterTracker() {
         };
       });
     },
-    [today, update],
+    [update],
   );
 
   const removeServing = useCallback(

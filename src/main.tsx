@@ -3,19 +3,19 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./App";
 
-if ("serviceWorker" in navigator) {
-  if (import.meta.env.PROD) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
-    });
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  const registerServiceWorker = () => {
+    navigator.serviceWorker
+      .register(`${import.meta.env.BASE_URL}sw.js`, { updateViaCache: "none" })
+      .catch((error: unknown) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  };
+
+  if (document.readyState === "complete") {
+    registerServiceWorker();
   } else {
-    navigator.serviceWorker.getRegistrations().then(async (regs) => {
-      if (!regs.length) return;
-      await Promise.all(regs.map((r) => r.unregister()));
-      const keys = await caches.keys();
-      await Promise.all(keys.map((k) => caches.delete(k)));
-      if (navigator.serviceWorker.controller) location.reload();
-    });
+    window.addEventListener("load", registerServiceWorker, { once: true });
   }
 }
 
