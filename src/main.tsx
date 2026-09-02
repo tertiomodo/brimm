@@ -19,6 +19,12 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
   }
 }
 
+for (const type of ["gesturestart", "gesturechange", "gestureend"]) {
+  document.addEventListener(type, (event) => {
+    event.preventDefault();
+  });
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
